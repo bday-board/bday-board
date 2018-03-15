@@ -1,0 +1,33 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    "react"
+  ],
+  "plugins": [
+    [
+      "transform-imports",
+      {
+        "react-bootstrap": {
+          "transform": "react-bootstrap/lib/${member}",
+          "preventFullImport": true
+        }
+      }
+    ],
+    "lodash",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "remove-console",
+        "minify-dead-code-elimination",
+        "transform-minify-booleans"
+      ]
+    }
+  }
+}
