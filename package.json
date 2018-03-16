@@ -22,8 +22,9 @@
     "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-bootstrap": "^0.31.5",
+    "react-coverflow": "^0.2.11",
     "react-dom": "^15.6.2",
-    "webpack": "D:\\nodejs3.11.0",
+    "webpack": "^3.11.0",
     "webpack-sources": "^1.1.0",
     "wolfy87-eventemitter": "^5.2.4"
   },

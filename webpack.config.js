@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require('path');
-const NODE_ENV = 'production';
-//const NODE_ENV = 'development';
+//const NODE_ENV = 'production';
+const NODE_ENV = 'development';
 
 const analyzeBundles = false;
 

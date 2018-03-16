@@ -2376,6 +2376,23 @@ h1 .li, h2 .li, h3 .li, p .li {
   line-height: 1.875;
   font-weight: 200;
 }
+#text03 {
+  letter-spacing: 0.1rem;
+  width: calc(100% + 0.225rem);
+  font-size: 0.75em;
+  line-height: 1.2;
+  font-weight: 200;
+  text-align: left;
+  text-transform: none;
+  margin-bottom: 5px;
+}
+#text03 br {
+  margin: 0;
+}
+#text-wrapper {
+  display: inline-block;
+  margin: 0 auto !important;
+}
 
 h1, h2, h3, p {
   text-transform: uppercase;
@@ -2614,3 +2631,11 @@ hr:before {
   }
 }
 
+figure[class^="coverflow__figure"] > div {
+  transform: translateX(-25%) !important;
+}
+
+[class^="coverflow__container"] {
+  background: none !important;
+  overflow: unset !important;
+}
