@@ -11,8 +11,10 @@ $f3->route('GET /',
 
 $f3->route('GET /getUsers',
 	function() use ($db) {
-	var_dump(date('Y-m-d'));
-		$res = $db->exec("SELECT * FROM users WHERE bdate = date('now')");
+		$res = $db->exec("
+			SELECT id, name, avatar, date(bdate/1000, 'unixepoch', 'localtime') as bdate
+ 			FROM users WHERE date(bdate/1000, 'unixepoch', 'localtime') = date('now')
+		");
 		var_dump($res);
 	}
 );
