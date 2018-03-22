@@ -7,6 +7,15 @@ class App extends Component {
 		super(props);
 	}
 
+	componentWillMount() {
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET','/getUsers');
+		xhr.onreadystatechange = e => {
+
+		};
+		xhr.send();
+	}
+
 	render() {
 		return (
 			<div id="wrapper">
@@ -44,13 +53,13 @@ class App extends Component {
 								<h1 id="text01">Хрен с`Горы</h1>
 								<hr id="divider01"/>
 								<div id="text-wrapper">
-									<p id="text03">
+									<p className="text03">
 										Желаю в жизни только света,<br/>
 										Тепла, успехов и любви.<br/>
 										В душе чтоб было вечным лето,<br/>
 										Чтоб звезды в путь тебя вели.<br/>
 									</p>
-									<p id="text03">
+									<p className="text03">
 										Лишь радости, в делах — удачи,<br/>
 										Свершений новых и побед.<br/>
 										И только так — никак иначе.<br/>

@@ -7,7 +7,8 @@ const analyzeBundles = false;
 
 let config = {
 	entry: {
-		app: './src/app/app.jsx'
+		app: './src/app/app.jsx',
+		add: './src/app/add.jsx'
 	},
 
 	output: {

@@ -24,6 +24,7 @@
     "react-bootstrap": "^0.31.5",
     "react-coverflow": "^0.2.11",
     "react-dom": "^15.6.2",
+    "react-text-mask": "^5.2.1",
     "webpack": "^3.11.0",
     "webpack-sources": "^1.1.0",
     "wolfy87-eventemitter": "^5.2.4"
