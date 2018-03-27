@@ -1,3 +1,19 @@
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
+@mixin transition($value) {
+  -webkit-transition: $value;
+  -moz-transition: $value;
+  -ms-transition: $value;
+  -o-transition: $value;
+  transition: $value;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Arvo:400,700");
 * {
   margin: 0;
@@ -1156,52 +1172,6 @@ s {
   text-decoration: line-through;
 }
 
-body:before {
-  content: '';
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  -moz-pointer-events: none;
-  -webkit-pointer-events: none;
-  -ms-pointer-events: none;
-  pointer-events: none;
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  background-image: linear-gradient(60deg, rgba(251, 135, 43, 0.502) 9%, rgba(217, 224, 33, 0.353) 100%);  background-position: 0% 0%, center;
-  background-repeat: repeat, no-repeat;
-  background-size: cover, cover;
-  background-attachment: scroll;
-  background-color: #FFFFFF;
-}
-
-body:after {
-  display: block;
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #C2D0D7;
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  -moz-transition: opacity 1.25s ease-in-out 0s, visibility 1.25s 0s;
-  -webkit-transition: opacity 1.25s ease-in-out 0s, visibility 1.25s 0s;
-  -ms-transition: opacity 1.25s ease-in-out 0s, visibility 1.25s 0s;
-  transition: opacity 1.25s ease-in-out 0s, visibility 1.25s 0s;
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
 body.is-loading:after {
   opacity: 1;
   visibility: visible;
@@ -1234,6 +1204,7 @@ html {
   z-index: 2;
   overflow: hidden;
   padding: 1.5625rem 1.5625rem 1.5625rem 1.5625rem;
+  @include transition(background 0.4s ease);
 }
 
 #main {
@@ -1797,22 +1768,6 @@ figure[class^="coverflow__figure"] > div {
 
 .form-group {
   margin-bottom: 10px;
-}
-
-@mixin transform($value) {
-  -webkit-transform: $value;
-  -moz-transform: $value;
-  -ms-transform: $value;
-  -o-transform: $value;
-  transform: $value;
-}
-
-@mixin transition($value) {
-  -webkit-transition: $value;
-  -moz-transition: $value;
-  -ms-transition: $value;
-  -o-transition: $value;
-  transition: $value;
 }
 
 .owl-stage:after {
