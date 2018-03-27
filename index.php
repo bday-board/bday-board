@@ -98,7 +98,9 @@ $f3->route('GET /getUsers',
 			SELECT id, name, avatar, date(bdate/1000, 'unixepoch', 'localtime') as bdate
  			FROM users WHERE date(bdate/1000, 'unixepoch', 'localtime') = date('now')
 		");
-		var_dump($res);
+
+		header('Content-Type: application/json');
+		echo json_encode($res);
 	}
 );
 

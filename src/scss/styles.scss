@@ -1378,18 +1378,14 @@ body.is-loading #main {
   display: block;
 }
 
-#image01 {
-  margin-top: 1.5rem !important;
-  margin-bottom: 1.5rem !important;
+.avatar-image {
+  text-align: center;
 }
-
-#image01 a, #image01 span {
+.avatar-image img {
+  height: 7rem;
+  width: auto !important;
   border-radius: 100%;
-}
-
-#image01 img {
-  width: 7rem;
-  border-radius: 100%;
+  margin: 0 auto;
 }
 
 h1 br + br, h2 br + br, h3 br + br, p br + br {
@@ -1671,12 +1667,18 @@ hr:before {
 }
 
 figure[class^="coverflow__figure"] > div {
-  transform: translateX(-25%) !important;
+  transform: translateX(-8.5%) !important;
 }
 
 [class^="coverflow__container"] {
   background: none !important;
   overflow: unset !important;
+}
+
+[class^="coverflow__figure"] {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .two-cols {
@@ -1795,4 +1797,44 @@ figure[class^="coverflow__figure"] > div {
 
 .form-group {
   margin-bottom: 10px;
+}
+
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
+@mixin transition($value) {
+  -webkit-transition: $value;
+  -moz-transition: $value;
+  -ms-transition: $value;
+  -o-transition: $value;
+  transition: $value;
+}
+
+.owl-stage:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.owl-item {
+  float: left;
+  @include transition(transform 0.4s ease);
+  @include transform(perspective(1000px) rotateY(20deg)scale(0.8));
+}
+
+.owl-item.center,
+.owl-item:last-of-type {
+  @include transform(none);
+}
+
+.owl-item.center ~ .owl-item {
+  @include transform(perspective(1000px) rotateY(-20deg) scale(0.8));
+}
+.owl-dots.disabled,
+.owl-nav.disabled {
+  display: none;
 }

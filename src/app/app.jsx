@@ -1,35 +1,53 @@
 import React, {Component} from 'react';
 import {render as renderDOM} from 'react-dom';
-import Coverflow from 'react-coverflow';
+import OwlCarousel from 'react-owl-carousel3';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			users: []
+		}
 	}
 
 	componentWillMount() {
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET','/getUsers');
-		xhr.onreadystatechange = e => {
-
+		xhr.responseType = 'json';
+		xhr.onreadystatechange = () => {
+			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+				this.setState({users: xhr.response});
+			}
 		};
 		xhr.send();
 	}
 
 	render() {
+		if(this.state.users.length === 0) return null;
+		let options = {
+			autoWidth: true,
+			mouseDrag: true,
+			center: true,
+			items: 2,
+			margin: 40,
+			dots: false,
+			loop: true,
+			nav: false,
+			startPosition: Math.floor(this.state.users.length / 2),
+			onInitialized: e => {
+				console.log('initialized', e);
+			}
+		};
 		return (
 			<div id="wrapper">
-				<Coverflow
-					width={1400}
-					height={572}
-					currentFigureScale={.8}
-					otherFigureScale={.5}
-					displayQuantityOfSide={2}
-					navigation={false}
-					enableHeading={false}
+				<OwlCarousel ref={'users'} className="owl-theme"
+					{...options}
 				>
-					{[...Array(7)].map((e,i) => (
-						<div id="main" key={i}>
+					{this.state.users.map((user, i) => (
+						<div id="main" className="carousel-item" key={`user-${user.id}`} style={{width: '560px'}}
+							onClick={() => this.refs.users.to(i, 300) || console.log(i)}
+						>
 							<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink={"http://www.w3.org/1999/xlink"} viewBox="0 0 40 40" display="none"
 								width="0" height="0">
 								<symbol id="icon-906" viewBox="0 0 40 40">
@@ -47,10 +65,10 @@ class App extends Component {
 							</svg>
 							<div className="inner">
 								<p id="text02">С днём рождения!</p><hr id="divider01"/>
-								<div id="image01" className="image">
-									<img src={"img/image01.png"}/>
+								<div className="avatar-image">
+									<img src={user.avatar || '/avatars/no-avatar.png'}/>
 								</div>
-								<h1 id="text01">Хрен с`Горы</h1>
+								<h1 id="text01">{user.name}</h1>
 								<hr id="divider01"/>
 								<div id="text-wrapper">
 									<p className="text03">
@@ -69,7 +87,7 @@ class App extends Component {
 							</div>
 						</div>
 					))}
-				</Coverflow>
+				</OwlCarousel>
 			</div>
 		);
 	}
