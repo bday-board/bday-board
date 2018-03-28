@@ -1142,13 +1142,13 @@ body.is-loading #main {
   display: block; }
 
 .avatar-image {
-  text-align: center; }
-
-.avatar-image img {
-  height: 7rem;
-  width: auto !important;
   border-radius: 100%;
-  margin: 0 auto; }
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-size: 100%;
+  background-position: center; }
 
 h1 br + br, h2 br + br, h3 br + br, p br + br {
   display: block;
@@ -1483,12 +1483,11 @@ figure[class^="coverflow__figure"] > div {
 .form-group {
   margin-bottom: 10px; }
 
-.owl-stage:after {
+#owl-carousel .owl-stage:after {
   content: '';
   display: table;
   clear: both; }
-
-.owl-item {
+#owl-carousel .owl-item {
   float: left;
   -webkit-transition: transform 0.4s ease;
   -moz-transition: transform 0.4s ease;
@@ -1500,24 +1499,21 @@ figure[class^="coverflow__figure"] > div {
   -ms-transform: perspective(1000px) rotateY(20deg) scale(0.8);
   -o-transform: perspective(1000px) rotateY(20deg) scale(0.8);
   transform: perspective(1000px) rotateY(20deg) scale(0.8); }
-
-.owl-item.center,
-.owl-item:last-of-type {
+#owl-carousel .owl-item.center,
+#owl-carousel .owl-item:last-of-type {
   -webkit-transform: none;
   -moz-transform: none;
   -ms-transform: none;
   -o-transform: none;
   transform: none; }
-
-.owl-item.center ~ .owl-item {
+#owl-carousel .owl-item.center ~ .owl-item {
   -webkit-transform: perspective(1000px) rotateY(-20deg) scale(0.8);
   -moz-transform: perspective(1000px) rotateY(-20deg) scale(0.8);
   -ms-transform: perspective(1000px) rotateY(-20deg) scale(0.8);
   -o-transform: perspective(1000px) rotateY(-20deg) scale(0.8);
   transform: perspective(1000px) rotateY(-20deg) scale(0.8); }
-
-.owl-dots.disabled,
-.owl-nav.disabled {
+#owl-carousel .owl-dots.disabled,
+#owl-carousel .owl-nav.disabled {
   display: none; }
 
 /*# sourceMappingURL=style.css.map */

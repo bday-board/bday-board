@@ -86,6 +86,11 @@ class App extends Component {
 	send(e) {
 		e.preventDefault();
 		const form = this.state.form;
+
+		if(!form.name || !form.bdate) {
+			alert('Заполните поля!');
+			return;
+		}
 		let formData = new FormData();
 		formData.append('name', form.name);
 		formData.append('bdate', form.bdate);
@@ -93,6 +98,16 @@ class App extends Component {
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST','/addUser');
+		xhr.responseType = 'json';
+		xhr.onreadystatechange = () => {
+			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+				if(xhr.response) {
+					alert('Добавлено');
+					this.setState({form: {}, pastedImage: null});
+					document.getElementById('avatar').value = '';
+				}
+			}
+		};
 		xhr.send(formData);
 	}
 

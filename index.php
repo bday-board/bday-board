@@ -68,14 +68,14 @@ $f3->route('POST /addUser',
 		$params = $f3->get('POST');
 		$files = $f3->get('FILES');
 
-		$avatarUrl = null;
+		$filename = null;
 		if(!empty($files['avatar'])) {
-			$filename = realpath(__DIR__.'/avatars').'/'.generateGuidV4();
+			$filename = '/avatars/'.generateGuidV4().'_'.$files['avatar']['name'];
 			$content = file_get_contents($files['avatar']['tmp_name']);
 			if($content === false) {
 				$f3->error(500);
 			}
-			$avatarUrl = saveFileTo($filename, $content);
+			$avatarUrl = saveFileTo(realpath(__DIR__).$filename, $content);
 			if($avatarUrl === false) {
 				$f3->error(500);
 			}
@@ -86,9 +86,12 @@ $f3->route('POST /addUser',
 			$f3->error(500);
 		}
 
-		$res = $db->exec("INSERT INTO users(name, bdate, avatar) VALUES (?, ?, ?);", [$name, $bdate->format('Y-m-d'), $avatarUrl]);
+		$res = $db->exec("INSERT INTO users(name, bdate, avatar) VALUES (?, ?, ?);", [$name, $bdate->format('Y-m-d'), $filename]);
 
-		var_dump($res);
+		if($res) {
+			echo 1;
+		}
+		else echo 0;
 	}
 );
 
@@ -96,7 +99,7 @@ $f3->route('GET /getUsers',
 	function() use ($db) {
 		$res = $db->exec("
 			SELECT id, name, avatar, date(bdate/1000, 'unixepoch', 'localtime') as bdate
- 			FROM users WHERE date(bdate/1000, 'unixepoch', 'localtime') = date('now')
+ 			FROM users WHERE date(bdate/1000, 'unixepoch', 'localtime') = date('now') OR bdate = date('now')
 		");
 
 		header('Content-Type: application/json');

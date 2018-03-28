@@ -35,7 +35,12 @@ let config = {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
 		}),
-		new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/ru$/)
+		new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/ru$/),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery'
+		}),
 	]
 };
 if(NODE_ENV == 'production') {

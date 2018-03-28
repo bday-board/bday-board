@@ -1350,13 +1350,13 @@ body.is-loading #main {
 }
 
 .avatar-image {
-  text-align: center;
-}
-.avatar-image img {
-  height: 7rem;
-  width: auto !important;
   border-radius: 100%;
+  width: 170px;
+  height: 170px;
   margin: 0 auto;
+  overflow: hidden;
+  background-size: 100%;
+  background-position: center;
 }
 
 h1 br + br, h2 br + br, h3 br + br, p br + br {
@@ -1770,26 +1770,28 @@ figure[class^="coverflow__figure"] > div {
   margin-bottom: 10px;
 }
 
-.owl-stage:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-.owl-item {
-  float: left;
-  @include transition(transform 0.4s ease);
-  @include transform(perspective(1000px) rotateY(20deg)scale(0.8));
-}
+#owl-carousel {
+  .owl-stage:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  .owl-item {
+    float: left;
+    @include transition(transform 0.4s ease);
+    @include transform(perspective(1000px) rotateY(20deg)scale(0.8));
+  }
 
-.owl-item.center,
-.owl-item:last-of-type {
-  @include transform(none);
-}
+  .owl-item.center,
+  .owl-item:last-of-type {
+    @include transform(none);
+  }
 
-.owl-item.center ~ .owl-item {
-  @include transform(perspective(1000px) rotateY(-20deg) scale(0.8));
-}
-.owl-dots.disabled,
-.owl-nav.disabled {
-  display: none;
+  .owl-item.center ~ .owl-item {
+    @include transform(perspective(1000px) rotateY(-20deg) scale(0.8));
+  }
+  .owl-dots.disabled,
+  .owl-nav.disabled {
+    display: none;
+  }
 }
