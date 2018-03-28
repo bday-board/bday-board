@@ -1516,4 +1516,39 @@ figure[class^="coverflow__figure"] > div {
 #owl-carousel .owl-nav.disabled {
   display: none; }
 
+table.table {
+  width: 100%;
+  font-size: 14px;
+  color: #333333;
+  border: 1px solid #3a3a3a;
+  border-collapse: collapse;
+  text-align: left; }
+  table.table th {
+    padding: 8px;
+    border: 1px solid #517994;
+    background-color: #B2CFD8;
+    text-align: center; }
+  table.table tr:hover td {
+    background-color: #DFEBF1; }
+  table.table td {
+    padding: 8px;
+    border: 1px solid #517994;
+    background-color: #fff; }
+
+.deleteUser {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #f44336;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 16px; }
+  .deleteUser:hover {
+    background-color: #e53935; }
+
 /*# sourceMappingURL=style.css.map */

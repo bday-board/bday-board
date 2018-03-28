@@ -95,13 +95,43 @@ $f3->route('POST /addUser',
 	}
 );
 
+$f3->route('GET /list',
+	function() {
+		echo View::instance()->render('views/list.html');
+	}
+);
+
+$f3->route('POST /deleteUser',
+	function($f3) use ($db) {
+		/** @var Base $f3 */
+		$params = $f3->get('POST');
+
+		$id = intval($params['id']);
+
+		$res = $db->exec("DELETE FROM users WHERE id = ?", [$id]);
+
+		if($res) {
+			echo 1;
+		}
+		else echo 0;
+	}
+);
+
 $f3->route('GET /getUsers',
 	function() use ($db) {
 		$res = $db->exec("
-			SELECT id, name, avatar, date(bdate/1000, 'unixepoch', 'localtime') as bdate
- 			FROM users WHERE date(bdate/1000, 'unixepoch', 'localtime') = date('now') OR bdate = date('now')
+			SELECT id, name, avatar, bdate
+ 			FROM users WHERE bdate = date('now')
 		");
 
+		header('Content-Type: application/json');
+		echo json_encode($res);
+	}
+);
+
+$f3->route('GET /listUsers',
+	function() use ($db) {
+		$res = $db->exec("SELECT id, name, avatar, bdate FROM users");
 		header('Content-Type: application/json');
 		echo json_encode($res);
 	}
