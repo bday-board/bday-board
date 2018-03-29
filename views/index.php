@@ -18,7 +18,39 @@ function getImages($dir) {
 	return $files;
 }
 
+function parseCongratulations($filepath) {
+	$congratulations = [];
+	if(file_exists($filepath)) {
+		$file = fopen($filepath, 'r');
+		if($file) {
+			$paragraphs = []; $lines = [];
+			while($line = fgets($file)) {
+				$line = trim($line);
+				if(empty($line)) {
+					if(!empty($lines)) {
+						$paragraphs[] = $lines;
+						$lines = [];
+					}
+					continue;
+				}
+				else {
+					if(preg_match('/^[-]{5}/', $line)) {
+						if(!empty($paragraphs)) {
+							$congratulations[] = $paragraphs;
+							$paragraphs = [];
+							continue;
+						}
+					}
+					else $lines[] = $line;
+				}
+			}
+			fclose($file);
+		}
+	}
+	return $congratulations;
+}
 $images = getImages(realpath(__DIR__.'/../bgrds/'));
+$congratulations = parseCongratulations(realpath(__DIR__.'/../').'/congratulations.txt');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +63,7 @@ $images = getImages(realpath(__DIR__.'/../bgrds/'));
 	<link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
 	<script>
 		window.__backgrounds = JSON.parse('<?= json_encode($images) ?>');
+		window.__congratulations = JSON.parse('<?= json_encode($congratulations) ?>');
 	</script>
 </head>
 <body>

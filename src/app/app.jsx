@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {render as renderDOM} from 'react-dom';
 import 'owl.carousel';
-import {congratulations} from '../../поздравления';
 import moment from 'moment';
 
 moment.locale('ru');
@@ -73,7 +72,7 @@ class App extends Component {
 			<div id="wrapper">
 				<div id="owl-carousel" className="owl-carousel owl-theme">
 					{this.state.users.map((user, i) => {
-						let header = null, congrBlock = null,
+						let header = null, congrBlock = null, congratulations = [],
 							userBDay = moment(user.bdate, 'YYYY-MM-DD', true).year(0),
 							today = moment().year(0);
 
@@ -84,11 +83,23 @@ class App extends Component {
 						else {
 							if(userBDay.isBefore(today, 'day')) {
 								header = <p id="text02">Недавно был день рождения</p>;
-								congrBlock = congratulations[this.getRandomInt(0, congratulations.length - 1)];
 							}
 							else {
 								header = <p id="text02">Сегодня день рождения!</p>;
-								congrBlock = congratulations[this.getRandomInt(0, congratulations.length - 1)];
+							}
+							congratulations = __congratulations[this.getRandomInt(0, __congratulations.length - 1)];
+							if(congratulations.length) {
+								congrBlock = (<div>
+									{congratulations.map((paragraphs, i) => {
+											let rows = [];
+											paragraphs.forEach((item, j) => {
+												if(rows.length) rows.push(<br key={`br_${j}`}/>);
+												rows.push(item);
+											});
+											return <p className="text03" key={i}>{rows}</p>
+										}
+									)}
+								</div>)
 							}
 						}
 
