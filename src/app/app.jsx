@@ -34,6 +34,13 @@ class App extends Component {
 					};
 					let owl = $('#owl-carousel');
 					owl.owlCarousel(options);
+					owl.on('wheel', e => {
+						e.preventDefault();
+						e = e.originalEvent;
+						let delta = e.deltaY || e.detail || e.wheelDelta;
+						if(delta > 0) owl.trigger('next.owl.carousel', [300]);
+						else owl.trigger('prev.owl.carousel', [300]);
+					});
 
 					this.owl = owl;
 				});
