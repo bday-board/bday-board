@@ -16,7 +16,6 @@ function saveFileTo($filepath, $content) {
 
 	return $filepath;
 }
-
 function generateGuidV4() {
 	if(function_exists('openssl_random_pseudo_bytes')) {
 		$data = openssl_random_pseudo_bytes(16);
@@ -51,8 +50,8 @@ $f3->set('UI', __DIR__.'/');
 $db = new DB\SQL('sqlite:db.sqlite');
 
 $f3->route('GET /',
-	function() {
-		echo View::instance()->render('views/index.html');
+	function() use ($images) {
+		echo View::instance()->render('views/index.php');
 	}
 );
 

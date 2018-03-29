@@ -1,3 +1,25 @@
+<?php
+function getImages($dir) {
+	$d = opendir($dir);
+	$files = [];
+	if($d) {
+		while(false !== ($file = readdir($d))) {
+			if($file != '.' && $file != '..') {
+				$file_parts = explode(".",$file);
+				$ext = strtolower(array_pop($file_parts));
+				$allowed_types = ["jpg", "png", "gif"];
+				if(in_array($ext,$allowed_types)) {
+					$files[] = $file;
+				}
+			}
+		}
+		closedir($d);
+	}
+	return $files;
+}
+
+$images = getImages(realpath(__DIR__.'/../bgrds/'));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +29,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
+	<script>
+		window.__backgrounds = JSON.parse('<?= json_encode($images) ?>');
+	</script>
 </head>
 <body>
 <div id="app"></div>

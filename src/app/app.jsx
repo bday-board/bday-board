@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {render as renderDOM} from 'react-dom';
 import 'owl.carousel';
 import {congratulations} from '../../поздравления';
-import {backgrounds} from '../../фоны';
 import moment from 'moment';
 
 moment.locale('ru');
@@ -59,11 +58,14 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		document.getElementById('wrapper').style.backgroundImage = `url('/bgrds/${backgrounds[this.getRandomInt(0, backgrounds.length - 1)]}')`;
-
-		setInterval(() => {
+		let backgrounds = __backgrounds || [];
+		if(backgrounds.length) {
 			document.getElementById('wrapper').style.backgroundImage = `url('/bgrds/${backgrounds[this.getRandomInt(0, backgrounds.length - 1)]}')`;
-		}, 5000);
+
+			setInterval(() => {
+				document.getElementById('wrapper').style.backgroundImage = `url('/bgrds/${backgrounds[this.getRandomInt(0, backgrounds.length - 1)]}')`;
+			}, 5000);
+		}
 	}
 
 	render() {
