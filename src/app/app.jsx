@@ -29,7 +29,7 @@ class App extends Component {
 				this.setState({users: xhr.response}, () => {
 					let options = {
 						autoplay: true,
-						autoplayTimeout: 5000,
+						autoplayTimeout: 8000,
 						mouseDrag: true,
 						center: true,
 						items: 3,
