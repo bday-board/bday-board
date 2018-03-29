@@ -132,6 +132,13 @@ $f3->route('GET /getUsers',
 		$res = $db->exec("
 			SELECT id, name, avatar, bdate
  			FROM users WHERE strftime('%d.%m', bdate) = strftime('%d.%m', date('now'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '+3 days'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '+2 days'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '+1 days'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '-1 days'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '-2 days'))
+ 				OR strftime('%d.%m', bdate) = strftime('%d.%m', date('now', '-3 days'))
+ 			ORDER BY bdate
 		");
 
 		header('Content-Type: application/json');
