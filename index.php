@@ -108,11 +108,21 @@ $f3->route('POST /deleteUser',
 
 		$id = intval($params['id']);
 
+		$res = $db->exec("SELECT avatar FROM users WHERE id = ?", [$id]);
+		if(!empty($res) && !empty($res[0]['avatar'])) {
+			$path = realpath('.'.$res[0]['avatar']);
+			if(file_exists($path)) {
+				$result = unlink($path);
+				if($result === false) {
+					echo 0;
+					return;
+				}
+			}
+		}
+
 		$res = $db->exec("DELETE FROM users WHERE id = ?", [$id]);
 
-		if($res) {
-			echo 1;
-		}
+		if($res) echo 1;
 		else echo 0;
 	}
 );
@@ -121,7 +131,7 @@ $f3->route('GET /getUsers',
 	function() use ($db) {
 		$res = $db->exec("
 			SELECT id, name, avatar, bdate
- 			FROM users WHERE bdate = date('now')
+ 			FROM users WHERE strftime('%d.%m', bdate) = strftime('%d.%m', date('now'))
 		");
 
 		header('Content-Type: application/json');
