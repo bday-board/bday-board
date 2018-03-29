@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {render as renderDOM} from 'react-dom';
 import 'owl.carousel';
+import {congratulations} from '../../поздравления';
+import {backgrounds} from '../../фоны';
 
 class App extends Component {
 	constructor(props) {
@@ -11,6 +13,10 @@ class App extends Component {
 		};
 
 		this.owl = null;
+	}
+
+	getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
 	}
 
 	componentWillMount() {
@@ -50,18 +56,10 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		let bgdrs = [
-			'/bgrds/bg1.jpg',
-			'/bgrds/bg2.jpg',
-			'/bgrds/bg3.jpg',
-			'/bgrds/bg4.jpg',
-		], i = 0;
-		document.getElementById('wrapper').style.backgroundImage = `url('${bgdrs[i]}')`;
+		document.getElementById('wrapper').style.backgroundImage = `url('/bgrds/${backgrounds[this.getRandomInt(0, backgrounds.length - 1)]}')`;
 
 		setInterval(() => {
-			i++;
-			if(i>=bgdrs.length) i = 0;
-			document.getElementById('wrapper').style.backgroundImage = `url('${bgdrs[i]}')`;
+			document.getElementById('wrapper').style.backgroundImage = `url('/bgrds/${backgrounds[this.getRandomInt(0, backgrounds.length - 1)]}')`;
 		}, 5000);
 	}
 
@@ -96,18 +94,7 @@ class App extends Component {
 								<h1 id="text01">{user.name}</h1>
 								<hr id="divider01"/>
 								<div id="text-wrapper">
-									<p className="text03">
-										Желаю в жизни только света,<br/>
-										Тепла, успехов и любви.<br/>
-										В душе чтоб было вечным лето,<br/>
-										Чтоб звезды в путь тебя вели.<br/>
-									</p>
-									<p className="text03">
-										Лишь радости, в делах — удачи,<br/>
-										Свершений новых и побед.<br/>
-										И только так — никак иначе.<br/>
-										Счастливых, ярких, долгих лет!
-									</p>
+									{congratulations[this.getRandomInt(0, congratulations.length - 1)]}
 								</div>
 							</div>
 						</div>
